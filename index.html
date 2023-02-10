@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="styles.css">
+	<script type="text/javascript" src="app.js">
+	</script>
+	<script src="https://d3js.org/d3.v7.min.js"></script>
+	<script src="https://d3js.org/topojson.v2.min.js"></script>
+	<title>DSC 106 Final Project</title>
+</head>
+
+<body onload=plots()>
+	<!-- Title -->
+	<h1 style="padding-top:80px; font-size: 50px;">DSC 106 Final Project: <br>Hate Crimes</h1>
+	<h3 style="font-weight: lighter;">Benjamin Sacks, Edwin Tse, James Dai</h3>
+
+
+	<h2 style="padding-top:30px;">Introduction</h2>
+	<p>We chose this dataset because we are not a fan of hate crimes. Our group feels that hate crimes are a very
+		relevant topic in today’s society as they are unfortunately not a rare occurrence. We have learned through our
+		studies at UCSD that data is powerful in telling narratives and understanding trends that may not be immediately
+		obvious. As a result, we feel that by choosing this dataset, we can learn from these previous tragedies to
+		understand and prevent new hate crimes through education. By using geolocation as an attribute we are able to
+		understand which parts of our country do well in its acceptance of diversity and which parts still need
+		improvement.
+	</p>
+	<p>
+		To deal with the sheer size of our dataset, we have randomly sampled 10% of the data in order to be able to
+		handle it within D3 and properly display it through a web browser. To account for the reduction in size, we have
+		multiplied applicable datapoints by 10 in attempt to keep visualizations as accurate as possible.
+	</p>
+	<h3 style="text-align:center"><br>Guiding Question</h3>
+	<p style="text-align:center">How have hate crimes changed in the United States over the past three decades?</p>
+
+
+
+	<div id="partA">
+		<h2 style="padding-top:30px;">Part A</h2>
+
+		<h4>Frequency of Hate Crimes Since 1991 (Line Plot)</h4>
+		<div id="q1_plot" class="center_plot">
+		</div>
+		<div class="plot_questions">
+			<ol>
+				<li>
+					<b>Choice of Color Scheme:</b> For this plot, we chose a dark blue color because 
+					it contrasted well with the light background. 
+					Furthermore, as it is a line plot, there are no other
+					colors that are to be used so we do not need to worry
+					about the observed difference between two colors
+					(i.e. red/green for colorblind individuals), thus any
+					single color with enough contrast from the background
+					would have worked.
+				</li>
+				<li>
+					<ul>
+						<li>
+							<b>Marks:</b> Points, line
+						</li>
+						<li  style="padding-bottom:30px;">
+							<b>Channels:</b> Position, Tilt (for line between points)
+						</li>
+					</ul>
+				</li>
+			</ol>
+		</div>
+		<h4>Types of Hate Crimes and Race of Offenders and Victims that are Most Common (Stacked Bar Graph)</h4>
+		<input type="radio" id="q2_victim" name="type" value="victim" checked="checked">
+		<label for="victim">Victim Race</label>
+		<input type="radio" id="q2_offender" name="type" value="offender">
+		<label for="offender">Offender Race</label>
+		<div id="q2_plot" class="center_plot">
+		</div>
+		<div class="plot_questions">
+			<ol>
+				<li>
+					<b>Choice of Color Scheme:</b> For this plot, we used the built in
+					d3 color scheme. There is no sequential nature to the colors since
+					they are meant to represent groups.
+				</li>
+				<li>
+					<ul>
+						<li>
+							<b>Marks:</b> Areas
+						</li>
+						<li  style="padding-bottom:30px;">
+							<b>Channels:</b> Position, Area, Color
+						</li>
+					</ul>
+				</li>
+			</ol>
+		</div>
+
+		<h4>Average Count of Offenders Aggregated by City Against the Average Counts of Victims Aggregated by City
+			(Scatterplot)</h4>
+		<div id="q3_plot" class="center_plot">
+		</div>
+		<ol>
+		<li><b>Choice of Color Scheme:</b> For this plot, we used a single color to represent the data. Blue is a fairly safe color as it is not a common type of colorblindness. Finally the blue provides a nice contrast with the neutral background of the site itself and to the surrounding tiles in the heat map itself.</li>
+		<li>
+			<ul>
+				<li><b>Marks:</b> Points</li>
+				<li style="padding-bottom:30px;"><b>Channels:</b> Both Horizontal and Vertical position</li>
+			</ul>
+		</li>
+		</ol>
+
+		<h4>Count of the Juvenile Offenders and the Regions when they Commit the Hate Crime (Box Plot)</h4>
+		<div id="q4_plot" class="center_plot">
+		</div>
+		<ol>
+		<li><b>Choice of Color Scheme:</b> For this plot we used a lighter green to represent the data. Green is a safe color that is not susceptible to color blindness and fits well with the background color. It's a fairly neutral tone that isn't too saturated and easy on the eyes.</li>
+		<li>
+			<ul>
+				<li><b>Marks:</b> Area, Lines</li>
+				<li style="padding-bottom:30px;"><b>Channels:</b> Both Horizontal and Vertical position, length, area, color</li>
+			</ul>
+		</li>
+		</ol>
+		
+		
+
+		<h4>How the Race of the Persecutor of a Hate Crime Relates to the Race of the Victim of a Hate Crime (Heatmap)
+		</h4>
+		<div id="q5_plot" class="center_plot">
+		</div>
+		<ol>
+		<li><b>Choice of Color Scheme:</b> For this plot, we used a sequential color scheme with a blue hue to represent the data. Blue is a fairly safe color as it is not a common type of colorblindness. Finally the blue provides a nice contrast with the neutral background of the site itself and to the surrounding tiles in the heat map itself.</li>
+		<li>
+			<ul>
+				<li><b>Marks:</b> Area</li>
+				<li style="padding-bottom:30px;"><b>Channels:</b> Both Horizontal and Vertical position, Area, Color</li>
+			</ul>
+		</li>
+		</ol>
+
+		<h4>Where Hate Crimes Occur in the United States (Choropleth)</h4>
+		<div id="q6_plot" class="center_plot">
+		</div>
+		<ol>
+		<li><b>Choice of Color Scheme:</b> For this plot, we also used a sequential color scheme with a blue hue to represent the data similar to the above plot. Blue is a fairly safe color as it is not a common type of colorblindness. Finally the blue provides a nice contrast with the neutral background of the site itself.</li>
+		<li style = "padding-bottom:80px;">
+			<ul>
+				<li><b>Marks:</b> Area</li>
+				<li ><b>Channels:</b> Shape, Area, Color</li>
+			</ul>
+		</li>
+		</ol>
+
+
+	</div>
+
+</body>
+
+</html>

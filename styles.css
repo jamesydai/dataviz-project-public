@@ -1,0 +1,21 @@
+body {
+	margin:40px auto;
+	font-family: 'Helvetica', 'Arial', sans-serif;
+	max-width:850px;
+	line-height:1.6;
+	font-size:18px;
+	color:#444;
+	padding:0 10px;
+	background-color:#EEEEEE;
+}
+
+.center_plot {
+    margin: auto;
+    text-align: center;
+}
+
+h1,h2,h3{
+	line-height:1.2;
+	}
+	
+
